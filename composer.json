@@ -11,5 +11,9 @@
       "psr-4": {
         "JuniorFontenele\\QualitorWS\\": "src/"
       }
+    },
+    "require": {
+      "php": ">=7.3.0",
+      "ext-soap": "*"
     }
 }
