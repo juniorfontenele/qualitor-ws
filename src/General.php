@@ -50,4 +50,13 @@ class General extends QualitorWS {
     }
     return $return;
   }
+
+  /**
+   * @param string $query
+   * @return array
+   */
+  public function getSQLQueryResult(string $query): array {
+    $result = $this->execute('getSQLQueryResult', ['dsquery' => $query]);
+    return $result;
+  }
 }
