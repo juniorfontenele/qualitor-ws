@@ -1,0 +1,15 @@
+{
+    "name": "juniorfontenele/qualitor-ws",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Junior Fontenele",
+            "email": "lcbfjr@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "JuniorFontenele\\QualitorWS\\": "src/"
+      }
+    }
+}
