@@ -44,7 +44,7 @@ abstract class QualitorWS {
     self::addXMLData($xml, $xmlArray);
 
     $dom = dom_import_simplexml($xml)->ownerDocument;
-    $dom->encoding = "ISO-8859-1";
+    //$dom->encoding = "ISO-8859-1";
     $dom->formatOutput = true;
     return $dom->saveXML();
   }
