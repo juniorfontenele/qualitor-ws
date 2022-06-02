@@ -34,6 +34,10 @@ class Ticket extends QualitorWS {
     return $this->execute('cancelTicket', ['cdchamado' => $ticket_id, 'dsacompanhamento' => $reason]);
   }
 
+  public function startTicket($ticket_id) {
+    return $this->execute('startTicket', ['cdchamado' => $ticket_id]);
+  }
+
   public function setTicketNextStep($ticket_id, $step_id) {
     return $this->execute('setTicketNextStep', ['cdchamado' => $ticket_id, 'cdetapa' => $step_id]);
   }
