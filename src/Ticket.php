@@ -47,6 +47,10 @@ class Ticket extends QualitorWS {
     return $this->execute('addTicketHistory', ['cdchamado' => $ticket_id, 'dsacompanhamento' => $history, 'cdtipoacompanhamento' => $history_type_id]);
   }
 
+  public function getTicketAdditionalInfos($ticket_id) {
+    return $this->execute('getTicketAdditionalInfos', ['cdchamado' => $ticket_id]);
+  }
+
   public function setTicketNextStep($ticket_id, $step_id) {
     return $this->execute('setTicketNextStep', ['cdchamado' => $ticket_id, 'cdetapa' => $step_id]);
   }
