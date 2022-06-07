@@ -72,4 +72,12 @@ class Ticket extends QualitorWS {
     ];
     return $this->execute('changeTicketAdditionalInfo', $data);
   }
+
+  public function addTicketByData(int $client_id, int $contact_id, array $ticket_data) {
+    $ticketData = array_merge($ticket_data, [
+      'cdcliente' => $client_id,
+      'cdcontato' => $contact_id
+    ]);
+    return $this->execute('addTicketByData', $ticketData);
+  }
 }
