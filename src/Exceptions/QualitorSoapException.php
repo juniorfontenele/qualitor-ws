@@ -2,4 +2,4 @@
 
 namespace JuniorFontenele\QualitorWS\Exceptions;
 
-class QualitorSoapException extends QualitorException {}
+class QualitorSoapException extends QualitorConnectionException {}
