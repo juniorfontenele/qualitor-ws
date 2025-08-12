@@ -5,7 +5,7 @@ namespace JuniorFontenele\QualitorWS;
 use JuniorFontenele\QualitorWS\Exceptions\QualitorLoginException;
 use JuniorFontenele\QualitorWS\Exceptions\QualitorResponseException;
 use JuniorFontenele\QualitorWS\Exceptions\QualitorSoapException;
-use JuniorFontenele\QualitorWS\Exceptions\QualitorXmlException;
+use JuniorFontenele\QualitorWS\Exceptions\QualitorParseException;
 use SoapClient;
 use SoapFault;
 
@@ -70,7 +70,7 @@ abstract class QualitorWS
      * @param array $data Data to be included in the XML
      * @param string $root Root element name
      * @return string XML content
-     * @throws QualitorXmlException
+     * @throws QualitorParseException
      */
     private function getXmlContent(array $data, string $root = 'wsqualitor'): string
     {
@@ -85,7 +85,7 @@ abstract class QualitorWS
         $dom = dom_import_simplexml($xml)->ownerDocument;
         //$dom->encoding = "ISO-8859-1";
         $dom->formatOutput = true;
-        return $dom->saveXML() ?: throw new QualitorXmlException('getXmlContent: Failed to generate XML');
+        return $dom->saveXML() ?: throw new QualitorParseException('getXmlContent: Failed to generate XML');
     }
 
     /**
@@ -112,7 +112,7 @@ abstract class QualitorWS
      * @param string $function Qualitor SOAP function
      * @param array|null $arg Qualitor SOAP arguments
      * @return array
-     * @throws QualitorXmlException
+     * @throws QualitorParseException
      */
     public function execute(string $function, ?array $arg = null): array
     {
@@ -124,11 +124,11 @@ abstract class QualitorWS
      *
      * @param string $xmlString XML content
      * @return array
-     * @throws QualitorXmlException
+     * @throws QualitorParseException
      */
     protected function parseResponse(string $xmlString): array
     {
-        $xml = simplexml_load_string($xmlString, "SimpleXMLElement", LIBXML_NOCDATA) ?: throw new QualitorXmlException('parseResponse: Failed to parse XML');
+        $xml = simplexml_load_string($xmlString, "SimpleXMLElement", LIBXML_NOCDATA) ?: throw new QualitorParseException('parseResponse: Failed to parse XML');
         if ($xml->response_status->status != 1) {
             throw new QualitorResponseException("Erro " . $xml->response_status->error_code[0] . ": " . $xml->response_status->msg);
         } else {
