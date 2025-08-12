@@ -2,7 +2,10 @@
 
 namespace JuniorFontenele\QualitorWS;
 
+use JuniorFontenele\QualitorWS\Exceptions\QualitorConnectionException;
+use JuniorFontenele\QualitorWS\Exceptions\QualitorLoginException;
 use JuniorFontenele\QualitorWS\Exceptions\QualitorResponseException;
+use JuniorFontenele\QualitorWS\Exceptions\QualitorSoapException;
 
 class Ticket extends QualitorWS
 {
@@ -14,6 +17,9 @@ class Ticket extends QualitorWS
      * @param string $user Username for authentication
      * @param string $pass Password for authentication
      * @param int $company_id Company ID for the API
+     * @throws QualitorConnectionException
+     * @throws QualitorLoginException
+     * @throws QualitorSoapException
      */
     public function __construct($url, $user, $pass, $company_id)
     {
