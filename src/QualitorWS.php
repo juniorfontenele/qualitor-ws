@@ -137,7 +137,10 @@ abstract class QualitorWS
     {
         $xml = simplexml_load_string($xmlString, "SimpleXMLElement", LIBXML_NOCDATA) ?: throw new QualitorParseException('parseResponse: Failed to parse XML');
         if ($xml->response_status->status != 1) {
-            throw new QualitorResponseException("Erro " . $xml->response_status->error_code[0] . ": " . $xml->response_status->msg);
+            $errorCode = isset($xml->response_status->error_code[0]) ? (int) $xml->response_status->error_code[0] : 0;
+            $errorMessage = isset($xml->response_status->msg) ? (string) $xml->response_status->msg : 'Unknown error';
+
+            throw new QualitorResponseException("Erro " . $errorCode . ": " . $errorMessage, $errorCode);
         } else {
             $json = json_encode($xml);
             $array = json_decode($json, true);
