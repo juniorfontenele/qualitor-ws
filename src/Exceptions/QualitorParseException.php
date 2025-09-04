@@ -2,4 +2,4 @@
 
 namespace JuniorFontenele\QualitorWS\Exceptions;
 
-class QualitorParseException extends QualitorException {}
+class QualitorParseException extends QualitorServiceException {}

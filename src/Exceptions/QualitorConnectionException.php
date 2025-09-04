@@ -2,4 +2,4 @@
 
 namespace JuniorFontenele\QualitorWS\Exceptions;
 
-class QualitorConnectionException extends \Exception {}
+class QualitorConnectionException extends QualitorException {}
