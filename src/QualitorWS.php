@@ -120,6 +120,7 @@ abstract class QualitorWS
      * @param array|null $arg Qualitor SOAP arguments
      * @return array
      * @throws QualitorParseException
+     * @throws QualitorResponseException
      */
     public function execute(string $function, ?array $arg = null): array
     {
@@ -132,15 +133,16 @@ abstract class QualitorWS
      * @param string $xmlString XML content
      * @return array
      * @throws QualitorParseException
+     * @throws QualitorResponseException
      */
     protected function parseResponse(string $xmlString): array
     {
         $xml = simplexml_load_string($xmlString, "SimpleXMLElement", LIBXML_NOCDATA) ?: throw new QualitorParseException('parseResponse: Failed to parse XML');
         if ($xml->response_status->status != 1) {
             $errorCode = isset($xml->response_status->error_code[0]) ? (int) $xml->response_status->error_code[0] : 0;
-            $errorMessage = isset($xml->response_status->msg) ? (string) $xml->response_status->msg : 'Unknown error';
+            $errorMessage = isset($xml->response_status->msg) ? (string) $xml->response_status->msg : 'Ws - Unknown error';
 
-            throw new QualitorResponseException("Erro " . $errorCode . ": " . $errorMessage, $errorCode);
+            throw new QualitorResponseException($errorMessage, $errorCode);
         } else {
             $json = json_encode($xml);
             $array = json_decode($json, true);
