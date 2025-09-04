@@ -33,7 +33,10 @@ abstract class QualitorWS
     public function __construct(string $url, string $user, string $pass, int $company_id = 1)
     {
         try {
-            $this->client = new SoapClient($url);
+            $this->client = new SoapClient($url, [
+                'cache_wsdl' => WSDL_CACHE_NONE,
+            ]);
+
             $this->user = $user;
             $this->pass = $pass;
             $this->company_id = $company_id;
