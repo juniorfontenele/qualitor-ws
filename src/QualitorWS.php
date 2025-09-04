@@ -54,7 +54,7 @@ abstract class QualitorWS
         try {
             $this->tokenLogin = $this->client->login($this->user, $this->pass, $this->company_id);
         } catch (\Exception $e) {
-            throw new QualitorLoginException($e->getMessage());
+            throw new QualitorLoginException($e->getMessage(), 401, $e);
         }
     }
 
